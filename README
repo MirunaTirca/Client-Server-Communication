@@ -1,0 +1,21 @@
+Requests
+Se folosesc functiile: compute_get_request, post_request si compute_delete_request
+De asemenea, unul din argumentele acestor functii este un JSON_Value, in care
+se afla informatia pusa sub forma unui JSON. Argumentul char* auth_token este
+introdus in header-ul mesajului (este nevoie de el pentru a demonstra accesul
+user-ului la biblioteca).
+
+Client.c
+Deschid conexiunea TCP si astept comenzi de la tastatura. Pentru fiecare
+comanda valida formez cererea de GET,POST sau DELETE, o trimit la server si
+astept raspuns. Dupa fiecare mesaj primit de la server inchid conexiunea si
+o redeschid la urmatoarea citire de la stdin.
+
+Parsarea continutului de tip JSON:
+Folosesc functia json_parse_string, ce primeste un string si il transforma
+intr-un JSON_Value. Apoi, cu functia json_serialization__size_pretty ii reduc
+dimensiunea. Acest JSON_Value este trimis pentru a forma mesajul de request
+corespunzator comenzii.
+Pentru raspunsurile de la server ce contin content de tip JSON, folosesc tot
+biblioteca string.h pentru a extrage informatiile necesare afisarii.
+
